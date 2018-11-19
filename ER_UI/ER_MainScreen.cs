@@ -46,6 +46,7 @@ namespace ER_UI
             if (CurrencyComboBox.SelectedItem != null)
             {
                 currentCurrency = CurrencyComboBox.SelectedItem as CurrencyModel;
+                ratesChart.Series[0].Name = currentCurrency.currency_name;
 
                 FlagPictureBox.Image = currentCurrency.Flag();                
             }            
