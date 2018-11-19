@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ER_Library.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,8 @@ namespace ER_UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            ApiHelper.InitializeClient();
+            Application.Run(new ER_MainScreen());
         }
     }
 }

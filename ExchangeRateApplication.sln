@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ER_UI", "ER_UI\ER_UI.csproj", "{2612FDEA-F7DB-4BEF-A1D9-066D7C4A63FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ER_Library", "ER_Library\ER_Library.csproj", "{8B5B6E2A-E503-45F3-84C4-9BEFBBEB2110}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2612FDEA-F7DB-4BEF-A1D9-066D7C4A63FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2612FDEA-F7DB-4BEF-A1D9-066D7C4A63FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2612FDEA-F7DB-4BEF-A1D9-066D7C4A63FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B5B6E2A-E503-45F3-84C4-9BEFBBEB2110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B5B6E2A-E503-45F3-84C4-9BEFBBEB2110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5B6E2A-E503-45F3-84C4-9BEFBBEB2110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B5B6E2A-E503-45F3-84C4-9BEFBBEB2110}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
