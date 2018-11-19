@@ -16,8 +16,7 @@ namespace ER_UI
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            ApiHelper.InitializeClient();
+            Application.SetCompatibleTextRenderingDefault(false);           
             Application.Run(new ER_MainScreen());
         }
     }
