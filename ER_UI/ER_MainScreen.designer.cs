@@ -114,32 +114,39 @@
             this.ratesChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.AxisX.InterlacedColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             chartArea1.AxisX.Interval = 1D;
+            chartArea1.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
             chartArea1.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
             chartArea1.AxisX.IsInterlaced = true;
             chartArea1.AxisX.IsStartedFromZero = false;
             chartArea1.AxisX.LabelStyle.Format = "d \\\\n MMM \\\\n yy";
+            chartArea1.AxisX.LabelStyle.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
             chartArea1.CursorY.Interval = 0.2D;
             chartArea1.CursorY.IsUserEnabled = true;
             chartArea1.CursorY.LineWidth = 2;
             chartArea1.Name = "ChartArea1";
-            chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 94F;
-            chartArea1.Position.Width = 86F;
-            chartArea1.Position.Y = 3F;
             this.ratesChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.ratesChart.Legends.Add(legend1);
             this.ratesChart.Location = new System.Drawing.Point(365, 3);
+            this.ratesChart.Margin = new System.Windows.Forms.Padding(0);
             this.ratesChart.Name = "ratesChart";
+            this.ratesChart.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.CustomProperties = "IsXAxisQuantitative=False";
+            series1.EmptyPointStyle.IsValueShownAsLabel = true;
             series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            series1.IsValueShownAsLabel = true;
             series1.LabelBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             series1.LabelToolTip = "#VALX";
             series1.Legend = "Legend1";
+            series1.MarkerBorderColor = System.Drawing.Color.Transparent;
             series1.Name = "Euro";
+            series1.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.No;
+            series1.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Date;
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             this.ratesChart.Series.Add(series1);
@@ -219,22 +226,22 @@
             // endDateTimePicker
             // 
             this.endDateTimePicker.Location = new System.Drawing.Point(276, 50);
-            this.endDateTimePicker.MaxDate = new System.DateTime(2018, 11, 19, 0, 0, 0, 0);
+            this.endDateTimePicker.MaxDate = new System.DateTime(2018, 11, 21, 0, 0, 0, 0);
             this.endDateTimePicker.MinDate = new System.DateTime(2005, 7, 5, 0, 0, 0, 0);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(224, 25);
             this.endDateTimePicker.TabIndex = 3;
-            this.endDateTimePicker.Value = new System.DateTime(2018, 11, 18, 0, 0, 0, 0);
+            this.endDateTimePicker.Value = new System.DateTime(2018, 11, 5, 0, 0, 0, 0);
             // 
             // startDateTimePicker
             // 
             this.startDateTimePicker.Location = new System.Drawing.Point(15, 50);
-            this.startDateTimePicker.MaxDate = new System.DateTime(2018, 11, 17, 0, 0, 0, 0);
+            this.startDateTimePicker.MaxDate = new System.DateTime(2018, 11, 20, 0, 0, 0, 0);
             this.startDateTimePicker.MinDate = new System.DateTime(2005, 7, 4, 0, 0, 0, 0);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(228, 25);
             this.startDateTimePicker.TabIndex = 2;
-            this.startDateTimePicker.Value = new System.DateTime(2018, 11, 12, 0, 0, 0, 0);
+            this.startDateTimePicker.Value = new System.DateTime(2018, 10, 23, 0, 0, 0, 0);
             // 
             // syncToolTip
             // 

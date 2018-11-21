@@ -35,7 +35,7 @@ namespace ER_UI
         private void ER_MainScreen_Load(object sender, EventArgs e)
         {      
             syncToolTip.SetToolTip(syncCurrenciesButton, GlobalConfig.GetAppConfig("SyncToolTip"));
-            InitializeCalendar();
+            //InitializeCalendar();
 
             PopulateCurrencies();
             RefreshExchangeRates();
@@ -65,28 +65,41 @@ namespace ER_UI
             ratesChart.Series[0].YValueMembers = "Value";
             ratesChart.Series[0].XValueMember = "Key";
 
-            ratesChart.DataSource = rates;
+            if (rates.Count() == 1)
+            {
+                rates.Add(new KeyValuePair<DateTime, decimal>(rates[0].Key.AddDays(-skipValue), rates[0].Value));               
 
-            RatesChartRefreshGrid();
+                ratesChart.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
+                ratesChart.ChartAreas[0].AxisX.Title = rates[0].Key.ToLongDateString();
+            }
+            else
+            {
+                ratesChart.ChartAreas[0].AxisX.LabelStyle.Enabled = true;
+                ratesChart.ChartAreas[0].AxisX.Title = "";
+            }
+
+            ratesChart.DataSource = rates;           
+            RatesChartRefreshPoints();            
         }
 
-        private void RatesChartRefreshGrid()
-        {
-            ratesChart.Series[0].IsValueShownAsLabel = true;
+        private void RatesChartRefreshPoints()
+        {           
+            ratesChart.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
+            ratesChart.ChartAreas[0].AxisY2.LabelStyle.Enabled = false;
+      
             ratesChart.ChartAreas[0].AxisX.IntervalOffset = 0;
 
-            double minRate;
-            double maxRate;
+            decimal minRate;
+            decimal maxRate;
 
             rates.Select(x => x.Value).ToList().GetMinMax(out minRate, out maxRate);
 
-            ratesChart.ChartAreas[0].AxisY.Minimum = minRate;
-            ratesChart.ChartAreas[0].AxisY.Maximum = maxRate;
+            ratesChart.ChartAreas[0].AxisY.Minimum = (double)minRate;
+            ratesChart.ChartAreas[0].AxisY.Maximum = (double)maxRate;
 
             ratesChart.ChartAreas[0].AxisX.Minimum = rates[rates.Count() - 1].Key.ToOADate();
             ratesChart.ChartAreas[0].AxisX.Maximum = rates[0].Key.ToOADate();
-
-            //TODO - Fix intervals to depend on EndDate (also when only 1 day/year is selected)
+            
             switch (selectedPeriod)
             {
                 case PeriodSpan.Days:
@@ -138,12 +151,12 @@ namespace ER_UI
                         ratesChart.ChartAreas[0].AxisX.IntervalOffset = endDateTimePicker.Value.DayOfYear - 1;
                     }
                     break;
-
                 default:
                     break;
             }
-
-            //ratesChart.ChartAreas[0].AxisX.IntervalOffset = 0;            
+            
+            //ratesChart.ChartAreas[0].AxisX.Interval = (ratesChart.ChartAreas[0].AxisX.Maximum - ratesChart.ChartAreas[0].AxisX.Minimum) / rates.Count();
+            //ratesChart.ChartAreas[0].AxisX.IntervalOffset = 0;   
         }
 
         private void SwitchPeriodSpan()
@@ -163,17 +176,17 @@ namespace ER_UI
             else if (period.TotalDays <= 93)
             {
                 selectedPeriod = PeriodSpan.Weeks;
-                skipValue = 7;
+                skipValue = 5;
             }
             else if (period.TotalDays <= 365)
             {
                 selectedPeriod = PeriodSpan.Months;
-                skipValue = 31;
+                skipValue = 23;
             }
             else
             {
                 selectedPeriod = PeriodSpan.Years;
-                skipValue = 365;
+                skipValue = 262;
             }
         }
 
@@ -202,6 +215,13 @@ namespace ER_UI
             {
                 SwitchPeriodSpan();
                 GetRates();
+
+                if (rates.Count() == 0)
+                {
+                    MessageBox.Show("No exchange rates available in the selected period");
+                    return;
+                }
+
                 PopulateRatesGrid();
                 PopulateRatesChart();
             }            
@@ -219,7 +239,6 @@ namespace ER_UI
                 MessageBox.Show("Start date can't be higher than End date");
                 return false;
             }
-
             return true;
         }
 
@@ -238,7 +257,7 @@ namespace ER_UI
             {
                 endDateTimePicker.Value = today.AddDays(5 - (int)today.DayOfWeek);                
             }
-            startDateTimePicker.Value = endDateTimePicker.Value.AddDays(-7);
+            startDateTimePicker.Value = endDateTimePicker.Value.AddDays(-7);            
         }
     }
 }

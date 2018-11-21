@@ -6,7 +6,7 @@ namespace ER_Library.Helpers
 {
     public static class ChartRateRange
     {
-        public static void GetMinMax(this List<decimal> rates, out double min, out double max)
+        public static void GetMinMax(this List<decimal> rates, out decimal min, out decimal max)
         {
             decimal ratesMin = rates.Min();
             decimal ratesMax = rates.Max();
@@ -18,8 +18,8 @@ namespace ER_Library.Helpers
                 decimalsNumber = 0;
             }
 
-            min = Math.Floor(Convert.ToDouble(ratesMin) * Math.Pow(10, decimalsNumber)) / Math.Pow(10, decimalsNumber);
-            max = Math.Ceiling(Convert.ToDouble(ratesMax) * Math.Pow(10, decimalsNumber)) / Math.Pow(10, decimalsNumber);
+            min = Math.Floor(ratesMin * (decimal)Math.Pow(10, decimalsNumber)) / (decimal)Math.Pow(10, decimalsNumber);
+            max = Math.Ceiling(ratesMax * (decimal)Math.Pow(10, decimalsNumber)) / (decimal)Math.Pow(10, decimalsNumber);
         }
 
         public static int CountRoundingPoint(decimal d)
