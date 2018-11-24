@@ -35,7 +35,7 @@ namespace ER_UI
         private void ER_MainScreen_Load(object sender, EventArgs e)
         {      
             syncToolTip.SetToolTip(syncCurrenciesButton, GlobalConfig.GetAppConfig("SyncToolTip"));
-            //InitializeCalendar();
+            InitializeCalendar();
 
             PopulateCurrencies();
             RefreshExchangeRates();
@@ -83,7 +83,7 @@ namespace ER_UI
         }
 
         private void RatesChartRefreshPoints()
-        {           
+        {
             ratesChart.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
             ratesChart.ChartAreas[0].AxisY2.LabelStyle.Enabled = false;
       
@@ -154,9 +154,9 @@ namespace ER_UI
                 default:
                     break;
             }
-            
+
             //ratesChart.ChartAreas[0].AxisX.Interval = (ratesChart.ChartAreas[0].AxisX.Maximum - ratesChart.ChartAreas[0].AxisX.Minimum) / rates.Count();
-            //ratesChart.ChartAreas[0].AxisX.IntervalOffset = 0;   
+            //ratesChart.ChartAreas[0].AxisX.IntervalOffset = 0;  
         }
 
         private void SwitchPeriodSpan()
