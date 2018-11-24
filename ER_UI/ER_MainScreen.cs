@@ -84,11 +84,6 @@ namespace ER_UI
 
         private void RatesChartRefreshPoints()
         {
-            ratesChart.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
-            ratesChart.ChartAreas[0].AxisY2.LabelStyle.Enabled = false;
-      
-            ratesChart.ChartAreas[0].AxisX.IntervalOffset = 0;
-
             decimal minRate;
             decimal maxRate;
 
@@ -99,72 +94,16 @@ namespace ER_UI
 
             ratesChart.ChartAreas[0].AxisX.Minimum = rates[rates.Count() - 1].Key.ToOADate();
             ratesChart.ChartAreas[0].AxisX.Maximum = rates[0].Key.ToOADate();
-            
-            switch (selectedPeriod)
-            {
-                case PeriodSpan.Days:
-                    ratesChart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
-                    ratesChart.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
 
-                    if (endDateTimePicker.Value.Day % 2 == 1)
-                    {
-                        ratesChart.ChartAreas[0].AxisX.IntervalOffset = 1;
-                    }
-                    break;
-
-                case PeriodSpan.DoubleDays:
-                    ratesChart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
-                    ratesChart.ChartAreas[0].AxisX.LabelStyle.Interval = 2;
-
-                    if (endDateTimePicker.Value.Day % 2 == 1)
-                    {
-                        ratesChart.ChartAreas[0].AxisX.IntervalOffset = 1;
-                    }
-                    break;
-
-                case PeriodSpan.Weeks:
-                    ratesChart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Weeks;
-                    ratesChart.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
-
-                    if ((int)endDateTimePicker.Value.DayOfWeek != 7)
-                    {
-                        ratesChart.ChartAreas[0].AxisX.IntervalOffset = (int)endDateTimePicker.Value.DayOfWeek;
-                    }
-                    break;
-
-                case PeriodSpan.Months:
-                    ratesChart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Months;
-                    ratesChart.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
-
-                    if (endDateTimePicker.Value.Day != 1)
-                    {
-                        ratesChart.ChartAreas[0].AxisX.IntervalOffset = endDateTimePicker.Value.Day - 1;
-                    }
-                    break;
-
-                case PeriodSpan.Years:
-                    ratesChart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Years;
-                    ratesChart.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
-
-                    if (endDateTimePicker.Value.DayOfYear != 1)
-                    {
-                        ratesChart.ChartAreas[0].AxisX.IntervalOffset = endDateTimePicker.Value.DayOfYear - 1;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            //ratesChart.ChartAreas[0].AxisX.Interval = (ratesChart.ChartAreas[0].AxisX.Maximum - ratesChart.ChartAreas[0].AxisX.Minimum) / rates.Count();
-            //ratesChart.ChartAreas[0].AxisX.IntervalOffset = 0;  
-
-
+            ratesChart.ChartAreas[0].AxisX.Interval = (ratesChart.ChartAreas[0].AxisX.Maximum - ratesChart.ChartAreas[0].AxisX.Minimum) / rates.Count();
+           
             List<DateTime> customLabels = rates.Select(x => x.Key).ToList();
+            ratesChart.ChartAreas[0].AxisX.CustomLabels.Clear();
 
             foreach (DateTime date in customLabels)
             {
-                CustomLabel customLabel = new CustomLabel(date.ToOADate() - 2, date.ToOADate() + 2, "test", 0, LabelMarkStyle.None);
-                ratesChart.ChartAreas[0].AxisX.CustomLabels.Add(customLabel);
+                CustomLabel customLabel = new CustomLabel(date.ToOADate() - skipValue, date.ToOADate() + skipValue, date.ToString("d\nMMM\nyy"), 0, LabelMarkStyle.None);
+                ratesChart.ChartAreas[0].AxisX.CustomLabels.Add(customLabel);                
             }
         }
 
@@ -264,7 +203,7 @@ namespace ER_UI
             }
             else
             {
-                endDateTimePicker.Value = today.AddDays(5 - (int)today.DayOfWeek);                
+                endDateTimePicker.Value = today.AddDays(((int)today.DayOfWeek + 6) % 5 - 3);                
             }
             startDateTimePicker.Value = endDateTimePicker.Value.AddDays(-7);            
         }

@@ -119,9 +119,9 @@
             chartArea1.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
             chartArea1.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
             chartArea1.AxisX.IsInterlaced = true;
+            chartArea1.AxisX.IsLabelAutoFit = false;
             chartArea1.AxisX.IsStartedFromZero = false;
             chartArea1.AxisX.LabelStyle.Format = "d \\\\n MMM \\\\n yy";
-            chartArea1.AxisX.LabelStyle.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
             chartArea1.CursorY.Interval = 0.2D;
             chartArea1.CursorY.IsUserEnabled = true;
             chartArea1.CursorY.LineWidth = 2;
