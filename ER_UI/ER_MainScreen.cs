@@ -157,6 +157,15 @@ namespace ER_UI
 
             //ratesChart.ChartAreas[0].AxisX.Interval = (ratesChart.ChartAreas[0].AxisX.Maximum - ratesChart.ChartAreas[0].AxisX.Minimum) / rates.Count();
             //ratesChart.ChartAreas[0].AxisX.IntervalOffset = 0;  
+
+
+            List<DateTime> customLabels = rates.Select(x => x.Key).ToList();
+
+            foreach (DateTime date in customLabels)
+            {
+                CustomLabel customLabel = new CustomLabel(date.ToOADate() - 2, date.ToOADate() + 2, "test", 0, LabelMarkStyle.None);
+                ratesChart.ChartAreas[0].AxisX.CustomLabels.Add(customLabel);
+            }
         }
 
         private void SwitchPeriodSpan()
