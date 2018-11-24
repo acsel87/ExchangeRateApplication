@@ -23,9 +23,6 @@ namespace ER_UI
         CurrencyModel currentCurrency = new CurrencyModel();
         List<KeyValuePair<DateTime, decimal>> rates = new List<KeyValuePair<DateTime, decimal>>();
 
-        enum PeriodSpan { Days, DoubleDays, Weeks, Months, Years}
-        PeriodSpan selectedPeriod = PeriodSpan.Days;
-
         int skipValue = 1;
 
         public ER_MainScreen()
@@ -103,7 +100,7 @@ namespace ER_UI
             foreach (DateTime date in customLabels)
             {
                 CustomLabel customLabel = new CustomLabel(date.ToOADate() - skipValue, date.ToOADate() + skipValue, date.ToString("d\nMMM\nyy"), 0, LabelMarkStyle.None);
-                ratesChart.ChartAreas[0].AxisX.CustomLabels.Add(customLabel);                
+                ratesChart.ChartAreas[0].AxisX.CustomLabels.Add(customLabel);
             }
         }
 
@@ -113,27 +110,22 @@ namespace ER_UI
 
             if (period.TotalDays <= 15)
             {
-                selectedPeriod = PeriodSpan.Days;
                 skipValue = 1;
             }
             else if (period.TotalDays <= 31)
             {
-                selectedPeriod = PeriodSpan.DoubleDays;
                 skipValue = 2;
             }
             else if (period.TotalDays <= 93)
             {
-                selectedPeriod = PeriodSpan.Weeks;
                 skipValue = 5;
             }
             else if (period.TotalDays <= 365)
             {
-                selectedPeriod = PeriodSpan.Months;
                 skipValue = 23;
             }
             else
             {
-                selectedPeriod = PeriodSpan.Years;
                 skipValue = 262;
             }
         }
